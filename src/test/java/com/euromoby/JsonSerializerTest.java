@@ -8,7 +8,23 @@ public class JsonSerializerTest {
     JsonSerializer serializer = new JsonSerializer();
 
     @Test
-    public void nullString() {
-        assertEquals("\"null\"", serializer.serialize(null));
+    public void serializeNull() {
+        assertEquals("null", serializer.serialize(null));
     }
+
+    @Test
+    public void serializeString() {
+        assertEquals("\"hello\"", serializer.serialize("hello"));
+    }
+
+    public class TestClass {
+        String s = "string";
+    }
+
+    @Test
+    public void serializeObject() {
+        TestClass tc = new TestClass();
+        assertEquals("{\"s\":\"string\"}", serializer.serialize(tc));
+    }
+
 }

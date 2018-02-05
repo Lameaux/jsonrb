@@ -9,8 +9,7 @@ public class StringSerializerTest {
 
     @Test
     public void serializeString() {
-        String string = "my string";
-        String expected = "\"my string\"";
-        assertEquals(expected, serializer.serialize(string));
+        assertEquals("null", serializer.serialize(null));
+        assertEquals("\"my string\"", serializer.serialize("my string"));
     }
 }

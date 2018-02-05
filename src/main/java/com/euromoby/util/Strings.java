@@ -2,6 +2,13 @@ package com.euromoby.util;
 
 public class Strings {
 
+    public static final String OBJECT_START = "{";
+    public static final String OBJECT_END = "}";
+    public static final String TYPE_SEPARATOR = ":";
+    public static final String FIELD_SEPARATOR = ",";
+
+    public static final String DOLLAR = "$";
+
     public static String quotes(String s) {
         return "\"" + s + "\"";
     }

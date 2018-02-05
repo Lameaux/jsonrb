@@ -1,10 +1,14 @@
 package com.euromoby.serializer;
 
+import com.euromoby.util.Objects;
 import com.euromoby.util.Strings;
 
-public class StringSerializer {
+public class StringSerializer implements Serializer<String> {
 
     public String serialize(String s) {
+        if (s == null) {
+            return Objects.NULL;
+        }
         return Strings.quotes(Strings.escape(s));
     }
 }
