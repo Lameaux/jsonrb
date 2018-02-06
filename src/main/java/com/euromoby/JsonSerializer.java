@@ -12,11 +12,11 @@ public class JsonSerializer {
     private final ObjectSerializer objectSerializer;
 
     public JsonSerializer() {
-        objectSerializer = new ObjectSerializer();
+        this(false);
     }
 
-    public JsonSerializer(Map<Class, Serializer> classSerializerMap) {
-        objectSerializer = new ObjectSerializer(classSerializerMap);
+    public JsonSerializer(boolean pretty) {
+        objectSerializer = new ObjectSerializer(pretty);
     }
 
     public String serialize(Object o) {

@@ -1,5 +1,7 @@
 package com.euromoby.util;
 
+import java.util.Arrays;
+
 public class Strings {
 
     public static final String OBJECT_START = "{";
@@ -8,6 +10,7 @@ public class Strings {
     public static final String FIELD_SEPARATOR = ",";
 
     public static final String DOLLAR = "$";
+    public static final String CRLF = "\r\n";
 
     public static String quotes(String s) {
         return "\"" + s + "\"";
@@ -29,5 +32,11 @@ public class Strings {
             }
         }
         return sb.toString();
+    }
+
+    public static String tabs(int len) {
+        char[] chars = new char[len];
+        Arrays.fill(chars, '\t');
+        return new String(chars);
     }
 }
