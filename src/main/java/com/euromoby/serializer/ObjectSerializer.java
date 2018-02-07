@@ -41,12 +41,20 @@ public class ObjectSerializer implements Serializer<Object> {
     }
 
     public String serialize(Object o, int tabs) {
-        String objectIdentation = Strings.tabs(tabs);
-        String fieldIdentation = Strings.tabs(tabs + 1);
-
         if (o == null) {
             return Objects.NULL;
         }
+
+        if (o.getClass().isArray()) {
+            return serializeArray((Object[])o, tabs);
+        }
+
+        return serializeObject(o, tabs);
+    }
+
+    private String serializeObject(Object o, int tabs) {
+        String objectIndentation = Strings.tabs(tabs);
+        String fieldIndentation = Strings.tabs(tabs + 1);
 
         Class clazz = o.getClass();
         Serializer serializer = classSerializerMap.get(clazz);
@@ -55,7 +63,6 @@ public class ObjectSerializer implements Serializer<Object> {
         }
 
         StringBuffer sb = new StringBuffer();
-
         sb.append(Strings.OBJECT_START);
 
         boolean comma = false;
@@ -69,7 +76,7 @@ public class ObjectSerializer implements Serializer<Object> {
 
                 if (pretty) {
                     sb.append(Strings.CRLF);
-                    sb.append(fieldIdentation);
+                    sb.append(fieldIndentation);
                 }
                 sb.append(Strings.quotes(fieldName));
                 sb.append(Strings.TYPE_SEPARATOR);
@@ -85,11 +92,38 @@ public class ObjectSerializer implements Serializer<Object> {
 
         if (pretty) {
             sb.append(Strings.CRLF);
-            sb.append(objectIdentation);
+            sb.append(objectIndentation);
         }
         sb.append(Strings.OBJECT_END);
         return sb.toString();
     }
 
+
+    private String serializeArray(Object[] array, int tabs) {
+        String arrayIndentation = Strings.tabs(tabs);
+        String valueIndentation = Strings.tabs(tabs + 1);
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(Strings.ARRAY_START);
+
+        boolean comma = false;
+        for (Object o: array) {
+            if (pretty) {
+                sb.append(Strings.CRLF);
+                sb.append(valueIndentation);
+            }
+            sb.append(serialize(o, tabs + 1));
+            sb.append(Strings.FIELD_SEPARATOR);
+            comma = true;
+        }
+        if (comma) sb.deleteCharAt(sb.length()-Strings.FIELD_SEPARATOR.length());
+
+        if (pretty) {
+            sb.append(Strings.CRLF);
+            sb.append(arrayIndentation);
+        }
+        sb.append(Strings.ARRAY_END);
+        return sb.toString();
+    }
 
 }

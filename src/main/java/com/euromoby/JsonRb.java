@@ -21,6 +21,9 @@ public class JsonRb {
             Object nested2 = new Object() {
                 String name = "Nested2";
             };
+
+            String[] arrays = new String[] {"str1", "str2", "str3"};
+
         };
 
         JsonSerializer compactSerializer = new JsonSerializer(false);

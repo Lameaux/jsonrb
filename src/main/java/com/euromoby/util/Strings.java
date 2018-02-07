@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Strings {
 
+    public static final String ARRAY_START = "[";
+    public static final String ARRAY_END = "]";
     public static final String OBJECT_START = "{";
     public static final String OBJECT_END = "}";
     public static final String TYPE_SEPARATOR = ":";
