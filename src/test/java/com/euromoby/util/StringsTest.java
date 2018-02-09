@@ -7,8 +7,13 @@ import static org.junit.Assert.*;
 public class StringsTest {
 
     @Test
-    public void quotes() {
-        assertEquals("\"test\"", Strings.quotes("test"));
+    public void enquote() {
+        assertEquals("\"test\"", Strings.enquote("test"));
+    }
+
+    @Test
+    public void dequote() {
+        assertEquals("test", Strings.dequote("\"test\""));
     }
 
     @Test

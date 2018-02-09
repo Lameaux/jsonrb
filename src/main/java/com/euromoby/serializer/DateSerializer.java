@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static com.euromoby.util.Strings.quotes;
+import com.euromoby.util.Strings;
 
 public class DateSerializer implements Serializer<Date> {
 
@@ -24,6 +24,6 @@ public class DateSerializer implements Serializer<Date> {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(d);
         c.setTimeZone(t);
-        return quotes(javax.xml.bind.DatatypeConverter.printDateTime(c));
+        return Strings.enquote(javax.xml.bind.DatatypeConverter.printDateTime(c));
     }
 }

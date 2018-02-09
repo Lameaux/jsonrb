@@ -70,7 +70,7 @@ public class ObjectSerializer implements Serializer<Object> {
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
                 String fieldName = field.getName();
-                if (fieldName.contains(Strings.DOLLAR)) continue;
+                if (fieldName.indexOf(Strings.DOLLAR) != -1) continue;
                 field.setAccessible(true);
                 Object fieldValue = field.get(o);
 
@@ -78,7 +78,7 @@ public class ObjectSerializer implements Serializer<Object> {
                     sb.append(Strings.CRLF);
                     sb.append(fieldIndentation);
                 }
-                sb.append(Strings.quotes(fieldName));
+                sb.append(Strings.enquote(fieldName));
                 sb.append(Strings.TYPE_SEPARATOR);
                 if (pretty) sb.append(" ");
                 sb.append(serialize(fieldValue, tabs + 1));

@@ -9,6 +9,6 @@ public class StringSerializer implements Serializer<String> {
         if (s == null) {
             return Objects.NULL;
         }
-        return Strings.quotes(Strings.escape(s));
+        return Strings.enquote(Strings.escape(s));
     }
 }
