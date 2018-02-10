@@ -4,12 +4,13 @@ import java.util.Arrays;
 
 public class Strings {
 
-    public static final String ARRAY_START = "[";
-    public static final String ARRAY_END = "]";
-    public static final String OBJECT_START = "{";
-    public static final String OBJECT_END = "}";
-    public static final String TYPE_SEPARATOR = ":";
-    public static final String FIELD_SEPARATOR = ",";
+    public static final char ARRAY_START = '[';
+    public static final char ARRAY_END = ']';
+    public static final char OBJECT_START = '{';
+    public static final char OBJECT_END = '}';
+    public static final char TYPE_SEPARATOR = ':';
+    public static final char FIELD_SEPARATOR = ',';
+    public static final int FIELD_SEPARATOR_LENGTH = 1;
 
     public static final char DOLLAR = '$';
     public static final char QUOTE = '"';

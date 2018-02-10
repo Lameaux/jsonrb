@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ObjectSerializer implements Serializer<Object> {
-    final private Map<Class, Serializer> classSerializerMap;
+public class ObjectSerializer {
+    final private Map<Class, TypeSerializer> classSerializerMap;
     final private boolean pretty;
 
     public ObjectSerializer() {
@@ -20,8 +20,8 @@ public class ObjectSerializer implements Serializer<Object> {
         this(defaultClassSerializerMap(), pretty);
     }
 
-    private static Map<Class, Serializer> defaultClassSerializerMap() {
-        Map<Class, Serializer> map = new HashMap<>();
+    private static Map<Class, TypeSerializer> defaultClassSerializerMap() {
+        Map<Class, TypeSerializer> map = new HashMap<>();
         map.put(Boolean.class, new BooleanSerializer());
         map.put(Date.class, new DateSerializer());
         map.put(Double.class, new DoubleSerializer());
@@ -31,7 +31,7 @@ public class ObjectSerializer implements Serializer<Object> {
         return map;
     }
 
-    public ObjectSerializer(Map<Class, Serializer> classSerializerMap, boolean pretty) {
+    public ObjectSerializer(Map<Class, TypeSerializer> classSerializerMap, boolean pretty) {
         this.classSerializerMap = classSerializerMap;
         this.pretty = pretty;
     }
@@ -57,7 +57,7 @@ public class ObjectSerializer implements Serializer<Object> {
         String fieldIndentation = Strings.tabs(tabs + 1);
 
         Class clazz = o.getClass();
-        Serializer serializer = classSerializerMap.get(clazz);
+        TypeSerializer serializer = classSerializerMap.get(clazz);
         if (serializer != null) {
             return serializer.serialize(o);
         }
@@ -88,7 +88,7 @@ public class ObjectSerializer implements Serializer<Object> {
         } catch (IllegalAccessException iae) {
             throw new RuntimeException(iae);
         }
-        if (comma) sb.deleteCharAt(sb.length()-Strings.FIELD_SEPARATOR.length());
+        if (comma) sb.deleteCharAt(sb.length()-Strings.FIELD_SEPARATOR_LENGTH);
 
         if (pretty) {
             sb.append(Strings.CRLF);
@@ -116,7 +116,7 @@ public class ObjectSerializer implements Serializer<Object> {
             sb.append(Strings.FIELD_SEPARATOR);
             comma = true;
         }
-        if (comma) sb.deleteCharAt(sb.length()-Strings.FIELD_SEPARATOR.length());
+        if (comma) sb.deleteCharAt(sb.length()-Strings.FIELD_SEPARATOR_LENGTH);
 
         if (pretty) {
             sb.append(Strings.CRLF);

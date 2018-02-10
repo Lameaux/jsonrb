@@ -1,10 +1,9 @@
 package com.euromoby.deserializer;
 
-import com.euromoby.serializer.Serializer;
 import com.euromoby.util.Objects;
 import com.euromoby.util.Strings;
 
-public class StringDeserializer implements Deserializer<String> {
+public class StringDeserializer implements TypeDeserializer<String> {
 
     @Override
     public String deserialize(String s) {

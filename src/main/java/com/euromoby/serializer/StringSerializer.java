@@ -3,7 +3,7 @@ package com.euromoby.serializer;
 import com.euromoby.util.Objects;
 import com.euromoby.util.Strings;
 
-public class StringSerializer implements Serializer<String> {
+public class StringSerializer implements TypeSerializer<String> {
 
     public String serialize(String s) {
         if (s == null) {

@@ -1,15 +1,16 @@
 package com.euromoby.deserializer;
 
 import com.euromoby.exception.JsonException;
-import com.euromoby.serializer.IntegerSerializer;
+import com.euromoby.serializer.FloatSerializer;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class IntegerDeserializerTest {
+public class FloatDeserializerTest {
 
-    IntegerSerializer serializer = new IntegerSerializer();
-    IntegerDeserializer deserializer = new IntegerDeserializer();
+    FloatSerializer serializer = new FloatSerializer();
+    FloatDeserializer deserializer = new FloatDeserializer();
 
     @Test
     public void deserializeNull() {
@@ -23,9 +24,9 @@ public class IntegerDeserializerTest {
 
     @Test
     public void deserializeString() {
-        for (int i = -100; i <= 100; i++) {
-            String integerString = serializer.serialize(i);
-            assertEquals((Integer)i, deserializer.deserialize(integerString));
+        for (float f = -100.123f; f <= 100.123f; f++) {
+            String floatString = serializer.serialize(f);
+            assertEquals((Float)f, deserializer.deserialize(floatString));
         }
     }
 

@@ -12,19 +12,22 @@ public class BooleanDeserializerTest {
     BooleanDeserializer deserializer = new BooleanDeserializer();
 
     @Test
-    public void deserializeString() {
+    public void deserializeNull() {
         assertEquals(null, deserializer.deserialize("null"));
-
-        String trueString = serializer.serialize(true);
-        assertEquals(true, deserializer.deserialize(trueString));
-
-        String falseString = serializer.serialize(false);
-        assertEquals(false, deserializer.deserialize(falseString));
     }
 
     @Test(expected = JsonException.class)
     public void invalidInput() {
         deserializer.deserialize("foo");
+    }
+
+    @Test
+    public void deserializeString() {
+        String trueString = serializer.serialize(true);
+        assertEquals(true, deserializer.deserialize(trueString));
+
+        String falseString = serializer.serialize(false);
+        assertEquals(false, deserializer.deserialize(falseString));
     }
 
 }

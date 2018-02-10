@@ -3,7 +3,7 @@ package com.euromoby.deserializer;
 import com.euromoby.exception.JsonException;
 import com.euromoby.util.Objects;
 
-public class BooleanDeserializer implements Deserializer<Boolean> {
+public class BooleanDeserializer implements TypeDeserializer<Boolean> {
 
     @Override
     public Boolean deserialize(String s) {

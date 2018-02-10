@@ -1,6 +1,5 @@
 package com.euromoby.serializer;
 
-import com.euromoby.JsonSerializer;
 import org.junit.Test;
 
 import java.util.Date;
@@ -21,8 +20,12 @@ public class DateSerializerTest {
     }
 
     @Test
-    public void serializeDate() {
+    public void serializeNull() {
         assertEquals("null", serializer.serialize(null));
+    }
+
+    @Test
+    public void serializeDate() {
         assertEquals("\"2010-11-12T13:14:15Z\"", serializer.serialize(letDate()));
     }
 }

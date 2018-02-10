@@ -7,7 +7,7 @@ import com.euromoby.util.Strings;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateDeserializer implements Deserializer<Date> {
+public class DateDeserializer implements TypeDeserializer<Date> {
 
     @Override
     public Date deserialize(String s) {

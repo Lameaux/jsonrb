@@ -14,16 +14,19 @@ public class DateDeserializerTest {
     DateDeserializer deserializer = new DateDeserializer();
 
     @Test
-    public void deserializeDate() {
+    public void deserializeNull() {
         assertEquals(null, deserializer.deserialize("null"));
-
-        Date date = new Date();
-        String s = serializer.serialize(date);
-        assertEquals(date, deserializer.deserialize(s));
     }
 
     @Test(expected = JsonException.class)
     public void invalidInput() {
         deserializer.deserialize("foo");
+    }
+
+    @Test
+    public void deserializeDate() {
+        Date date = new Date();
+        String s = serializer.serialize(date);
+        assertEquals(date, deserializer.deserialize(s));
     }
 }

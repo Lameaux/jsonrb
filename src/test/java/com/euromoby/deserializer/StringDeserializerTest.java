@@ -1,10 +1,7 @@
 package com.euromoby.deserializer;
 
-import com.euromoby.serializer.DateSerializer;
 import com.euromoby.serializer.StringSerializer;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,9 +11,12 @@ public class StringDeserializerTest {
     StringDeserializer deserializer = new StringDeserializer();
 
     @Test
-    public void deserializeString() {
+    public void deserializeNull() {
         assertEquals(null, deserializer.deserialize("null"));
+    }
 
+    @Test
+    public void deserializeString() {
         String s = "m\"y\\s\bt\fccc\rr\nin\tg";
         String serialized = serializer.serialize(s);
         assertEquals(s, deserializer.deserialize(serialized));

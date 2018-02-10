@@ -1,5 +1,5 @@
 package com.euromoby.deserializer;
 
-public interface Deserializer<T> {
+public interface TypeDeserializer<T> {
     T deserialize(String value);
 }

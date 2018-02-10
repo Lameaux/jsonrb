@@ -1,5 +1,5 @@
 package com.euromoby.serializer;
 
-public interface Serializer<T> {
+public interface TypeSerializer<T> {
     String serialize(T value);
 }

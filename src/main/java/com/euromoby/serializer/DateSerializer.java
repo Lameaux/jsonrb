@@ -9,7 +9,7 @@ import java.util.TimeZone;
 
 import com.euromoby.util.Strings;
 
-public class DateSerializer implements Serializer<Date> {
+public class DateSerializer implements TypeSerializer<Date> {
 
     private static final TimeZone TIMEZONE_UTC = TimeZone.getTimeZone("UTC");
 
