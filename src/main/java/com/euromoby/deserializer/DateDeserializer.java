@@ -1,5 +1,6 @@
 package com.euromoby.deserializer;
 
+import com.euromoby.exception.JsonException;
 import com.euromoby.util.Objects;
 import com.euromoby.util.Strings;
 
@@ -12,7 +13,11 @@ public class DateDeserializer implements Deserializer<Date> {
     public Date deserialize(String s) {
         if (Objects.NULL.equals(s)) return null;
         String dateString = Strings.dequote(s);
-        Calendar c = javax.xml.bind.DatatypeConverter.parseDateTime(dateString);
-        return c.getTime();
+        try {
+            Calendar c = javax.xml.bind.DatatypeConverter.parseDateTime(dateString);
+            return c.getTime();
+        } catch (IllegalArgumentException e) {
+            throw new JsonException("Invalid Date value: " + s, e);
+        }
     }
 }

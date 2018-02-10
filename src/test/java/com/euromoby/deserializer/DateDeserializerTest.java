@@ -1,5 +1,6 @@
 package com.euromoby.deserializer;
 
+import com.euromoby.exception.JsonException;
 import com.euromoby.serializer.DateSerializer;
 import org.junit.Test;
 
@@ -21,4 +22,8 @@ public class DateDeserializerTest {
         assertEquals(date, deserializer.deserialize(s));
     }
 
+    @Test(expected = JsonException.class)
+    public void invalidInput() {
+        deserializer.deserialize("foo");
+    }
 }
