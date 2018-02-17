@@ -1,13 +1,11 @@
 package com.euromoby.deserializer;
 
 import com.euromoby.exception.JsonException;
-import com.euromoby.serializer.DateSerializer;
+import com.euromoby.model.SimpleClass;
 import com.euromoby.serializer.ObjectSerializer;
 import org.junit.Test;
 
-import java.util.Date;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class ObjectDeserializerTest {
 
@@ -16,22 +14,32 @@ public class ObjectDeserializerTest {
 
     @Test
     public void deserializeNull() {
-        assertEquals(null, deserializer.deserialize("null", Object.class));
+        assertEquals(null, deserializer.deserialize("null", SimpleClass.class));
     }
 
     @Test(expected = JsonException.class)
     public void invalidInput() {
-        deserializer.deserialize("foo", Object.class);
+        deserializer.deserialize("foo", SimpleClass.class);
     }
 
     @Test
-    public void deserializeObject() {
-        assertEquals(null, deserializer.deserialize("null", Object.class));
+    public void deserializeEmptyObject() {
+        assertEquals(new SimpleClass(), deserializer.deserialize("{}", SimpleClass.class));
     }
 
     @Test
-    public void deserializeArray() {
-        assertEquals(null, deserializer.deserialize("null", Object[].class));
+    public void deserializeEmptyArray() {
+        assertArrayEquals(new SimpleClass[] {}, deserializer.deserialize("[]", SimpleClass[].class));
+    }
+
+    @Test
+    public void deserializeEmptyMessage() {
+        assertEquals(new SimpleClass(), deserializer.deserialize("{}", SimpleClass.class));
+    }
+
+    @Test
+    public void deserializeMessage() {
+        assertEquals(new SimpleClass("message"), deserializer.deserialize("{\"message\":\"message\"}", SimpleClass.class));
     }
 
 }

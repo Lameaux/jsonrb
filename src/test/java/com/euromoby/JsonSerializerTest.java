@@ -1,8 +1,7 @@
 package com.euromoby;
 
+import com.euromoby.model.TestClass;
 import org.junit.*;
-
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -17,14 +16,6 @@ public class JsonSerializerTest {
     @Test
     public void serializeString() {
         assertEquals("\"hello\"", serializer.serialize("hello"));
-    }
-
-    public class TestClass {
-        String string = "Hello";
-        Boolean boolTrue = true;
-        boolean boolFalse = false;
-        Integer i1 = 1;
-        int i2 = 2;
     }
 
     @Test

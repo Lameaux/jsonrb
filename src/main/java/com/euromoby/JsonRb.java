@@ -7,6 +7,7 @@ public class JsonRb {
     public static void main(String args[]) {
 
         Object o = new Object() {
+            String nullValue = null;
             String string = "Hello";
             Boolean boolTrue = true;
             boolean boolFalse = false;
@@ -26,10 +27,10 @@ public class JsonRb {
 
         };
 
-        JsonSerializer compactSerializer = new JsonSerializer(false);
+        JsonSerializer compactSerializer = new JsonSerializer(false, true);
         System.out.println(compactSerializer.serialize(o));
 
-        JsonSerializer prettySerializer = new JsonSerializer(true);
+        JsonSerializer prettySerializer = new JsonSerializer(true, false);
         System.out.println(prettySerializer.serialize(o));
     }
 

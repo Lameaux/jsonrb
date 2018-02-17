@@ -9,16 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ObjectSerializer {
-    final private Map<Class, TypeSerializer> classSerializerMap;
+    final private Map<Class, TypeSerializer> classSerializerMap = defaultClassSerializerMap();
     final private boolean pretty;
-
-    public ObjectSerializer() {
-        this(false);
-    }
-
-    public ObjectSerializer(boolean pretty) {
-        this(defaultClassSerializerMap(), pretty);
-    }
+    final private boolean skipNulls;
 
     private static Map<Class, TypeSerializer> defaultClassSerializerMap() {
         Map<Class, TypeSerializer> map = new HashMap<>();
@@ -31,9 +24,13 @@ public class ObjectSerializer {
         return map;
     }
 
-    public ObjectSerializer(Map<Class, TypeSerializer> classSerializerMap, boolean pretty) {
-        this.classSerializerMap = classSerializerMap;
+    public ObjectSerializer() {
+        this(false,false);
+    }
+
+    public ObjectSerializer(boolean pretty, boolean skipNulls) {
         this.pretty = pretty;
+        this.skipNulls = skipNulls;
     }
 
     public String serialize(Object o) {
@@ -74,6 +71,10 @@ public class ObjectSerializer {
                 field.setAccessible(true);
                 Object fieldValue = field.get(o);
 
+                if (skipNulls && fieldValue == null) {
+                    continue;
+                }
+
                 if (pretty) {
                     sb.append(Strings.CRLF);
                     sb.append(fieldIndentation);
@@ -97,7 +98,6 @@ public class ObjectSerializer {
         sb.append(Strings.OBJECT_END);
         return sb.toString();
     }
-
 
     private String serializeArray(Object[] array, int tabs) {
         String arrayIndentation = Strings.tabs(tabs);
